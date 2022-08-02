@@ -2,10 +2,12 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Person 1 - Which microservice? Teresa Wu - Automobile Service
+* Person 2 - Which microservice? Jennifer Wu - Auto Sales
 
 ## Design
+
+Please see excalidraw_modeling.png for Domain Driven Design.
 
 ## Service microservice
 
