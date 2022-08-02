@@ -8,7 +8,7 @@ import json
 class SalesPersonEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
-        # "id",
+        "id",
         "name",
         "employee_number",
     ]
@@ -23,20 +23,20 @@ def api_sales_persons(request):
             encoder=SalesPersonEncoder,
         )
     else:
-        # try:
-        content = json.loads(request.body)
-        print("***** CONTENT *******:", content)
-        sales_persons = SalesPerson.objects.create(**content)
-        print("***** SALES_PERSON *******:", sales_persons)            
-        return JsonResponse(
-            sales_persons,
-            encoder=SalesPersonEncoder,
-            safe=False,
-        )
-        # except:
-        #     return JsonResponse(
-        #         {"message": "Could not create sales person"},
-        #         status=400,
-        #     )
+        try:
+            content = json.loads(request.body)
+            print("***** CONTENT *******:", content)
+            sales_persons = SalesPerson.objects.create(**content)
+            print("***** SALES_PERSON *******:", sales_persons)            
+            return JsonResponse(
+                sales_persons,
+                encoder=SalesPersonEncoder,
+                safe=False,
+            )
+        except:
+            return JsonResponse(
+                {"message": "Could not create sales person"},
+                status=400,
+            )
 
 
