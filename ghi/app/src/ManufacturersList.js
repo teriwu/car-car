@@ -30,7 +30,7 @@ class ManufacturersList extends React.Component {
                     <tbody>
                         {this.state.manufacturers.map(manufacturer => {
                             return (
-                                <tr key={manufacturer.href}>
+                                <tr key={ manufacturer.href }>
                                     <td>{ manufacturer.name }</td>
                                 </tr>
                             );
