@@ -247,6 +247,37 @@ def api_sales_records(request):
             )   
 
 
-@require_http_methods(["GET", "POST"])
-def api_sales_record(request):
-    pass
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_sales_record(request, pk):
+    if request.method == "GET":
+        try:
+            sales_record = SalesRecord.objects.get(id=pk)
+            return JsonResponse(
+                sales_record,
+                encoder=SalesRecordEncoder,
+                safe=False,
+            )
+        except SalesRecord.DoesNotExist:
+            return JsonResponse(
+                {"message": "Sales record does not exist"},
+                status=404,
+            )
+    elif request.method == "DELETE":
+        try:
+            sales_record = SalesRecord.objects.get(id=pk)
+            sales_record.delete()
+            return JsonResponse(
+                {"message": "Deleted sales record"},
+                status=404,
+            )
+        except SalesRecord.DoesNotExist:
+            return JsonResponse ({"message": "Does not exist"})
+    else:
+        content = json.loads(request.body)
+        SalesRecord.objects.filter(id=pk).update(**content)
+        sales_record_detail = SalesRecord.objects.get(id=pk)
+        return JsonResponse(
+            sales_record_detail,
+            encoder=SalesRecordEncoder,
+            safe=False,
+        )
