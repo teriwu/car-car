@@ -7,7 +7,7 @@ import json
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["id", "vin", "import_href", "sold"]
+    properties = ["id", "vin", "import_href",]
 
 
 class SalesPersonEncoder(ModelEncoder):
@@ -37,6 +37,7 @@ class SalesRecordEncoder(ModelEncoder):
         "sales_person",
         "customer",
         "sales_price",
+        "sold",
     ]
     encoders = {
         "automobile": AutomobileVOEncoder(),
@@ -215,25 +216,37 @@ def api_sales_records(request):
             encoder=SalesRecordEncoder
         )
     else:
-        content = json.loads(request.body)
+        try:
+            content = json.loads(request.body)
+            print("***CONTENT****", content)
 
-        automobile_id = content["automobile"]
-        automobile = AutomobileVO.objects.get(id=automobile_id)
-        content["automobile"] = automobile
+            automobile_id = content["automobile"]
+            automobile = AutomobileVO.objects.get(id=automobile_id)
+            content["automobile"] = automobile
 
 
-        sales_person_id = content["sales_person"]
-        sales_person = SalesPerson.objects.get(id=sales_person_id)
-        content["sales_person"] = sales_person
+            sales_person_id = content["sales_person"]
+            sales_person = SalesPerson.objects.get(id=sales_person_id)
+            content["sales_person"] = sales_person
 
-        customer_id = content["customer"]
-        customer = Customer.objects.get(id=customer_id)
-        content["customer"] = customer
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
+            content["customer"] = customer
 
-        sales_record = SalesRecord.objects.create(**content)
-        print(sales_record)
-        return JsonResponse(
-            sales_record,
-            encoder=SalesRecordEncoder,
-            safe=False,
-        )
+            sales_record = SalesRecord.objects.create(**content)
+            # print(sales_record)
+            return JsonResponse(
+                sales_record,
+                encoder=SalesRecordEncoder,
+                safe=False,
+            )
+        except:
+            return JsonResponse(
+                {"message": "Could not create sales record"},
+                status=400,
+            )   
+
+
+@require_http_methods(["GET", "POST"])
+def api_sales_record(request):
+    pass
