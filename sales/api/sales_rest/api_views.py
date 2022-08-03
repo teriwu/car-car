@@ -25,9 +25,7 @@ def api_sales_persons(request):
     else:
         try:
             content = json.loads(request.body)
-            print("***** CONTENT *******:", content)
-            sales_persons = SalesPerson.objects.create(**content)
-            print("***** SALES_PERSON *******:", sales_persons)            
+            sales_persons = SalesPerson.objects.create(**content)           
             return JsonResponse(
                 sales_persons,
                 encoder=SalesPersonEncoder,
@@ -38,5 +36,46 @@ def api_sales_persons(request):
                 {"message": "Could not create sales person"},
                 status=400,
             )
+
+
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_sales_person(request, pk):
+    if request.method == "GET":
+        try:
+            sales_person = SalesPerson.objects.get(id=pk)
+            return JsonResponse(
+                sales_person,
+                encoder=SalesPersonEncoder,
+                safe=False,
+            )
+        except SalesPerson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Sales person does not exist"},
+                status=404,
+            )
+    elif request.method == "DELETE":
+        try:
+            sales_person = SalesPerson.objects.get(id=pk)
+            sales_person.delete()
+            return JsonResponse(
+                sales_person,
+                encoder=SalesPersonEncoder,
+                safe=False,
+            )
+        except SalesPerson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Sales person does not exist"},
+                status=404,
+            )
+    else:
+        content = json.loads(request.body)
+        SalesPerson.objects.filter(id=pk).update(**content)
+        sales_person_detail = SalesPerson.objects.get(id=pk)
+        return JsonResponse(
+            sales_person_detail,
+            encoder=SalesPersonEncoder,
+            safe=False,
+        )
+
 
 
