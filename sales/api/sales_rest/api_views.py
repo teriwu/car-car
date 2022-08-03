@@ -1,7 +1,8 @@
+from re import M
 from django.http import JsonResponse
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
-from sales_rest.models import SalesPerson
+from sales_rest.models import Customer, SalesPerson
 import json
 
 
@@ -11,6 +12,16 @@ class SalesPersonEncoder(ModelEncoder):
         "id",
         "name",
         "employee_number",
+    ]
+
+
+class CustomerEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        "id",
+        "name",
+        "address",
+        "phone_number",
     ]
 
 
@@ -78,4 +89,26 @@ def api_sales_person(request, pk):
         )
 
 
+@require_http_methods(["GET", "POST"])
+def api_customers(request):
+    if request.method =="GET":
+        customers = Customer.objects.all()
+        return JsonResponse(
+            {"customers": customers},
+            encoder=CustomerEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.create(**content)           
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except:
+            return JsonResponse(
+                {"message": "Could not create customer"},
+                status=400,
+            )
 
