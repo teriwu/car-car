@@ -12,20 +12,25 @@ class AutomobileVOEncoder(ModelEncoder):
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
-        "name",
         "employee_number",
+        "name",
     ]
 
 
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
+        "vip",
         "vin",
         "customer_name",
-        "date",
-        "time",
+        "date_time",
         "reason",
+        "technician",
     ]
+    encoders = {
+        "technician": TechnicianEncoder()
+    }
     
     def get_extra_data(self, o):
         return {"technician": o.technician.name}
