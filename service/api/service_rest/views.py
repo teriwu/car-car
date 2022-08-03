@@ -22,9 +22,7 @@ def api_appointments(request):
         )
     else: # POST
         content = json.loads(request.body)
-        print("CONTENT:", content)
         try:
-            print("HELLO")
             # sold_vin = AutomobileVO.objects.get(vin=content["vin"])
             if AutomobileVO.objects.filter(vin=content["vin"]).exists():
             # if sold_vin:
