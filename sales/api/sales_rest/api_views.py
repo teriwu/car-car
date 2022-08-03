@@ -1,9 +1,13 @@
-from re import M
 from django.http import JsonResponse
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
-from sales_rest.models import Customer, SalesPerson
+from sales_rest.models import AutomobileVO, Customer, SalesPerson, SalesRecord
 import json
+
+
+class AutomobileVOEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = ["id", "vin", "import_href", "sold"]
 
 
 class SalesPersonEncoder(ModelEncoder):
@@ -25,6 +29,22 @@ class CustomerEncoder(ModelEncoder):
     ]
 
 
+class SalesRecordEncoder(ModelEncoder):
+    model = SalesRecord
+    properties = [
+        "id",
+        "automobile",
+        "sales_person",
+        "customer",
+        "sales_price",
+    ]
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": SalesPersonEncoder(),
+        "customer": CustomerEncoder(),
+    }
+
+
 @require_http_methods(["GET", "POST"])
 def api_sales_persons(request):
     if request.method =="GET":
@@ -36,6 +56,7 @@ def api_sales_persons(request):
     else:
         try:
             content = json.loads(request.body)
+
             sales_persons = SalesPerson.objects.create(**content)           
             return JsonResponse(
                 sales_persons,
@@ -100,6 +121,7 @@ def api_customers(request):
     else:
         try:
             content = json.loads(request.body)
+
             customer = Customer.objects.create(**content)           
             return JsonResponse(
                 customer,
@@ -150,5 +172,68 @@ def api_customer(request, pk):
         return JsonResponse(
             customer_detail,
             encoder=CustomerEncoder,
+            safe=False,
+        )
+
+
+# @require_http_methods(["GET", "POST"])
+# def api_sales_records(request):
+#     if request.method == "GET":
+#         sales_records = SalesRecord.objects.all()
+#         return JsonResponse(
+#             {"sales_records": sales_records},
+#             encoder=SalesRecordEncoder,
+#             safe=False,
+#         )
+#     else:
+#         content = json.loads(request.body)
+#         try:
+#             if AutomobileVO.objects.filter(vin=content["vin"].exists()):
+#                 content["sold"] = True
+#             else:
+#                 content["sold"] = False
+#         except AutomobileVO.DoesNotExist:
+#             return JsonResponse(
+#                 {"message": "Invalid automobile vin"},
+#                 status = 400,
+#             )
+#         sales_record = SalesRecord.objects.create(**content)
+#         return JsonResponse(
+#             sales_record,
+#             encoder=SalesRecordEncoder,
+#             safe=False,
+#         )
+
+
+
+@require_http_methods(["GET", "POST"])
+def api_sales_records(request):
+    if request.method == "GET":
+        sales_records = SalesRecord.objects.all()
+        return JsonResponse(
+            {"sales_records": sales_records},
+            encoder=SalesRecordEncoder
+        )
+    else:
+        content = json.loads(request.body)
+
+        automobile_id = content["automobile"]
+        automobile = AutomobileVO.objects.get(id=automobile_id)
+        content["automobile"] = automobile
+
+
+        sales_person_id = content["sales_person"]
+        sales_person = SalesPerson.objects.get(id=sales_person_id)
+        content["sales_person"] = sales_person
+
+        customer_id = content["customer"]
+        customer = Customer.objects.get(id=customer_id)
+        content["customer"] = customer
+
+        sales_record = SalesRecord.objects.create(**content)
+        print(sales_record)
+        return JsonResponse(
+            sales_record,
+            encoder=SalesRecordEncoder,
             safe=False,
         )
