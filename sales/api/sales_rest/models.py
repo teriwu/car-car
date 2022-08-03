@@ -5,7 +5,6 @@ from django.urls import reverse
 class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
     vin = models.CharField(max_length=17)
-    sold = models.BooleanField(default=False)
 
 
 class SalesPerson(models.Model):
@@ -48,6 +47,8 @@ class SalesRecord(models.Model):
         on_delete=models.CASCADE,
     )
     sales_price = models.DecimalField(max_digits=10, decimal_places=2)
+    sold = models.BooleanField(default=True)
+
 
     def get_api_url(self):
         return reverse("api_sales_record", kwargs={"pk": self.id})
