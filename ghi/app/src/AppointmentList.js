@@ -4,7 +4,7 @@ function AppointmentsList(props) {
     const options = {timeZone: "UTC", year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit"};
     return (
         <div>
-            <h2>Service Appointment</h2>
+            <h2>Service Appointments</h2>
             <table className="table table-striped">
                 <thead>
                     <tr>
