@@ -18,7 +18,6 @@ class SalesRecordForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-
     handleSalesPersonChange(event) {
         const value = event.target.value;
         this.setState({sales_person: value});
@@ -63,12 +62,13 @@ class SalesRecordForm extends React.Component {
             const newSalesRecord = await response.json();
             console.log(newSalesRecord);
 
-            // const cleared = {
-            //     automobile: '',
-            //     sales_person: '',
-            //     customer: '',
-            //     sales_price: '',
-            // }
+            const cleared = {
+                automobile: '',
+                sales_person: '',
+                customer: '',
+                sales_price: '',
+            }
+            this.setState(cleared);
         }
     }
 
@@ -108,10 +108,6 @@ class SalesRecordForm extends React.Component {
                     <div className="shadow p-4 mt-4">
                         <h1>Add a sales record</h1>
                         <form onSubmit={this.handleSubmit} id="create-sale-record-form">      
-
-
-
-
                             <div className="mb-3">
                                 <select onChange={this.handleSalesPersonChange} required name="sales_persons" id="sales_persons" className="form-select" value={this.state.sales_person}>
                                     <option value="">Choose a sales person</option>
@@ -122,10 +118,6 @@ class SalesRecordForm extends React.Component {
                                         )})}
                                 </select>
                             </div>
-
-
-
-
                             <div className="mb-3">
                                 <select onChange={this.handleCustomerChange} required name="customer" id="customer" className="form-select" value={this.state.customer}>
                                     <option value="">Choose a customer</option>
@@ -136,11 +128,6 @@ class SalesRecordForm extends React.Component {
                                         )})}        
                                 </select>
                             </div>
-
-
-
-
-
                             <div className="mb-3">
                                 <select onChange={this.handleAutomobileChange} required name="automobile" id="automobile" className="form-select" value={this.state.auto}>
                                     <option value="">Choose an automobile</option>
@@ -153,16 +140,11 @@ class SalesRecordForm extends React.Component {
                                         })}
                                 </select>
                             </div>
-
-
-
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleSalesPriceChange} placeholder="Sales price" type="number" required name="sales_price" id="sales_price" className="form-control" value={this.state.sales_price} />
                                 <label htmlFor="sales_price">Sales price</label>        
                             </div>
-
-
-                        <button className="btn btn-primary">Create</button>
+                            <button className="btn btn-primary">Create</button>
                         </form>
                     </div>
                 </div>
