@@ -97,3 +97,22 @@ def api_technician(request, pk):
 
 @require_http_methods(["GET"])
 def api_vin(request, pk):
+    if request.method == "GET":
+        try:
+            # to test at endpoint, use vin for pk in path
+            all_appointments = Appointment.objects.filter(vin=pk)
+            # all_appointments = Appointment.objects.all()
+            return JsonResponse(
+                {"all_appointments": all_appointments},
+                encoder=AppointmentEncoder
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {"message": "Does not exist"},
+                status=404,
+            )
+    else:
+        return JsonResponse(
+            {"message": "Whoops!"},
+            status=400,
+        )
