@@ -115,6 +115,7 @@ def api_sales_person(request, pk):
 def api_sales_person_sales(request, pk):
     if request.method == "GET":
         try:
+            # to test at endpoint, use employee number for pk in path
             all_sales_records = SalesRecord.objects.filter(sales_person__employee_number=pk)
             # sales_person_sales_records = [record for record in all_sales_records if record["sales_person"]["id"]==pk]
             return JsonResponse(
@@ -128,7 +129,7 @@ def api_sales_person_sales(request, pk):
             )
     else:
         return JsonResponse(
-            {"message": "Sales person has no sales record"},
+            {"message": "Make sure you're using GET"},
             status=400,
         )
 
