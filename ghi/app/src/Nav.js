@@ -14,15 +14,6 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/technicians/new">New Technician</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/appointments/new">New Appointment</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/appointments">Service Appointments</NavLink>
-            </li> */}
             
             {/* Inventory drop down menu */}
             <li className="nav-item dropdown">
