@@ -68,7 +68,7 @@ class AppointmentForm extends React.Component {
                 "Content-type": "application/json",
             },
         };
-        const response = await fetch (appointmentUrl, fetchConfig);
+        const response = await fetch(appointmentUrl, fetchConfig);
         console.log("response console.log", response)
         if (response.ok) {
             const newAppointment = await response.json();
@@ -114,8 +114,6 @@ class AppointmentForm extends React.Component {
                                     })}
                                 </select>
                             </div>
-
-
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleChangeReason} value={this.state.reason} placeholder="Reason" required type="text" name="reason" id="reason" className="form-control" />
                                 <label htmlFor="reason">Reason</label>
