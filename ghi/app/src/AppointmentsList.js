@@ -31,7 +31,7 @@ function AppointmentsList(props) {
             </div>
 
             <div>
-                <h1 className="float-right">Service Appointments</h1>
+                <h1>Service Appointments</h1>
 
                 <table className="table table-striped">
                     <thead>
