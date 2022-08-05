@@ -111,6 +111,22 @@ def api_sales_person(request, pk):
         )
 
 
+@require_http_methods(["GET"])
+def api_sales_person_sales(pk):
+    try:
+        all_sales_records = SalesRecord.objects.filter(sales_person__employee_number=pk)
+        # sales_person_sales_records = [record for record in all_sales_records if record["sales_person"]["id"]==pk]
+        return JsonResponse(
+            {"sales_records": all_sales_records},
+            encoder=SalesRecordEncoder
+        )
+    except SalesPerson.DoesNotExist:
+        return JsonResponse(
+            {"message": "Sales person does not exist"},
+            status=404,
+        )
+
+
 @require_http_methods(["GET", "POST"])
 def api_customers(request):
     if request.method =="GET":
