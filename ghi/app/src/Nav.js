@@ -48,7 +48,6 @@ function Nav() {
                 <NavLink className="dropdown-item" aria-current="page" to="/technicians/new">New Technician</NavLink>
                 <NavLink className="dropdown-item" aria-current="page" to="/appointments/new">New Appointment</NavLink>
                 <NavLink className="dropdown-item" aria-current="page" to="/appointments">Service Appointments</NavLink>
-                <NavLink className="dropdown-item" aria-current="page" to="/appointments/search">Search Appointments</NavLink>
               </div>
             </li>
           </ul>

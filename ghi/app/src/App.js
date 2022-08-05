@@ -5,7 +5,6 @@ import AppointmentForm from "./AppointmentForm";
 import AppointmentsList from "./AppointmentsList";
 import TechnicianForm from "./TechnicianForm";
 import ModelForm from "./VehicleModelForm";
-import SearchForm from './SearchAppointments';
 
 
 function App(props) {
@@ -20,7 +19,6 @@ function App(props) {
           <Route path="appointments" element={<AppointmentsList appointments={props.appointments} />}/>
           <Route path="appointments/new" element={<AppointmentForm />} />
           <Route path="technicians/new" element={<TechnicianForm />} />
-          <Route path="appointments/search" element={<SearchForm />} />
         </Routes>
       </div>
     </BrowserRouter>
