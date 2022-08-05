@@ -112,18 +112,24 @@ def api_sales_person(request, pk):
 
 
 @require_http_methods(["GET"])
-def api_sales_person_sales(pk):
-    try:
-        all_sales_records = SalesRecord.objects.filter(sales_person__employee_number=pk)
-        # sales_person_sales_records = [record for record in all_sales_records if record["sales_person"]["id"]==pk]
+def api_sales_person_sales(request, pk):
+    if request.method == "GET":
+        try:
+            all_sales_records = SalesRecord.objects.filter(sales_person__employee_number=pk)
+            # sales_person_sales_records = [record for record in all_sales_records if record["sales_person"]["id"]==pk]
+            return JsonResponse(
+                {"sales_records": all_sales_records},
+                encoder=SalesRecordEncoder
+            )
+        except SalesPerson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Sales person does not exist"},
+                status=404,
+            )
+    else:
         return JsonResponse(
-            {"sales_records": all_sales_records},
-            encoder=SalesRecordEncoder
-        )
-    except SalesPerson.DoesNotExist:
-        return JsonResponse(
-            {"message": "Sales person does not exist"},
-            status=404,
+            {"message": "Sales person has no sales record"},
+            status=400,
         )
 
 
@@ -191,36 +197,6 @@ def api_customer(request, pk):
             encoder=CustomerEncoder,
             safe=False,
         )
-
-
-# @require_http_methods(["GET", "POST"])
-# def api_sales_records(request):
-#     if request.method == "GET":
-#         sales_records = SalesRecord.objects.all()
-#         return JsonResponse(
-#             {"sales_records": sales_records},
-#             encoder=SalesRecordEncoder,
-#             safe=False,
-#         )
-#     else:
-#         content = json.loads(request.body)
-#         try:
-#             if AutomobileVO.objects.filter(vin=content["vin"].exists()):
-#                 content["sold"] = True
-#             else:
-#                 content["sold"] = False
-#         except AutomobileVO.DoesNotExist:
-#             return JsonResponse(
-#                 {"message": "Invalid automobile vin"},
-#                 status = 400,
-#             )
-#         sales_record = SalesRecord.objects.create(**content)
-#         return JsonResponse(
-#             sales_record,
-#             encoder=SalesRecordEncoder,
-#             safe=False,
-#         )
-
 
 
 @require_http_methods(["GET", "POST"])
