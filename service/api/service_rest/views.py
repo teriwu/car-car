@@ -93,3 +93,7 @@ def api_technician(request, pk):
         )
     except Technician.DoesNotExist:
         return JsonResponse({"message": "Does not exist"})
+
+
+@require_http_methods(["GET"])
+def api_vin(request, pk):
