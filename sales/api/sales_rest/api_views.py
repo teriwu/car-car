@@ -129,7 +129,7 @@ def api_sales_person_sales(request, pk):
             )
     else:
         return JsonResponse(
-            {"message": "Make sure you're using GET"},
+            {"message": "Whoops!"},
             status=400,
         )
 
