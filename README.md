@@ -18,3 +18,14 @@ microservice, here.
 
 Explain your models and integration with the inventory
 microservice, here.
+
+---
+## Getting started
+1. Fork and clone from respository https://gitlab.com/teriwu/project-beta
+2. Run the following commands in your Terminal
+
+```
+docker volume create beta-data
+docker-compose build
+docker-compose up
+```
