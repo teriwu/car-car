@@ -14,11 +14,23 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
             </li>
-            
+
             {/* Inventory drop down menu */}
             <li className="nav-item dropdown">
               <NavLink className="nav-link active dropdown-toggle" to="/" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Inventory
+              </NavLink>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <NavLink className="dropdown-item" aria-current="page" to="manufcaturers/">Manufacturers List</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="manufacturers/new/">Create Manufacturer</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="/automobiles">List Automobiles</NavLink>
+              </div>
+            </li>
+            
+            {/* Sales dropdown menu */}
+            <li className="nav-item dropdown">
+              <NavLink className="nav-link active dropdown-toggle" to="/" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sales
               </NavLink>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <NavLink className="dropdown-item" aria-current="page" to="/models/new">New Vehicle Model</NavLink>
@@ -36,6 +48,7 @@ function Nav() {
                 <NavLink className="dropdown-item" aria-current="page" to="/technicians/new">New Technician</NavLink>
                 <NavLink className="dropdown-item" aria-current="page" to="/appointments/new">New Appointment</NavLink>
                 <NavLink className="dropdown-item" aria-current="page" to="/appointments">Service Appointments</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="/appointments/search">Search Appointments</NavLink>
               </div>
             </li>
           </ul>
