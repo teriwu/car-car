@@ -5,7 +5,7 @@ async function handleDelete(e) {
     await fetch (`http://localhost:8080/api/appointments/${id}/`, {method: "DELETE"})    
 }
         
-function AppointmentList(props) {
+function AppointmentsList(props) {
     const options = {timeZone: "UTC", year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit"};
             
     const [appointments, setAppointments] = useState([]);
@@ -24,9 +24,9 @@ function AppointmentList(props) {
     return (
         <>
             <div className="my-3 containerw">
-                <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="VIN" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-secondary">Search VIN</button>
+                <div className="input-group">
+                    <input type="search" className="form-control rounded" placeholder="VIN" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" className="btn btn-outline-secondary">Search VIN</button>
                 </div>
             </div>
 
@@ -71,4 +71,4 @@ function AppointmentList(props) {
     );
 }
 
-export default AppointmentList;
+export default AppointmentsList;

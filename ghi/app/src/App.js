@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import AppointmentForm from "./AppointmentForm";
-import AppointmentList from "./AppointmentList";
+import AppointmentsList from "./AppointmentsList";
 import TechnicianForm from "./TechnicianForm";
-import ModelForm from "./ModelForm";
+import ModelForm from "./VehicleModelForm";
 
 
 function App(props) {
@@ -15,7 +15,7 @@ function App(props) {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="appointments" element={<AppointmentList appointments={props.appointments} />}/>
+          <Route path="appointments" element={<AppointmentsList appointments={props.appointments} />}/>
           <Route path="appointments/new" element={<AppointmentForm />} />
           <Route path="technicians/new" element={<TechnicianForm />} />
           <Route path="models/new" element={<ModelForm />} />
