@@ -4,18 +4,12 @@ class TechnicianForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // employee_number: "",
             name: "",
         };
-        // this.handleChangeEmployeeNumber = this.handleChangeEmployeeNumber.bind(this);
+
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-
-    // handleChangeEmployeeNumber(event) {
-    //     const value = event.target.value;
-    //     this.setState({employeeNumber: value})
-    // }
 
     handleChangeName(event) {
         const value = event.target.value;
@@ -25,8 +19,6 @@ class TechnicianForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
-        // data.employee_number = data.employeeNumber;
-        // delete data.employeeNumber;
         console.log(data);
 
         const technicianUrl = "http://localhost:8080/api/technicians/";
@@ -42,7 +34,6 @@ class TechnicianForm extends React.Component {
             const newTechnician = await response.json();
             console.log("new technician:", newTechnician);
             this.setState({
-                // employee_number: "",
                 name: "",
             });
         }
@@ -51,10 +42,10 @@ class TechnicianForm extends React.Component {
 
     render() {
         return (
-            <><div className="row">
+            <><div className="my-5 container">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Create a new technician</h1>
+                        <h2 className="text-center">Create Technician</h2>
                         <form onSubmit={this.handleSubmit} id="create-technician-form">
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleChangeName} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
