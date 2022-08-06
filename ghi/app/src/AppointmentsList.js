@@ -10,6 +10,7 @@ class AppointmentsList extends React.Component {
 
         this.handleChangeVin = this.handleChangeVin.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
 
     }
 
@@ -41,6 +42,12 @@ class AppointmentsList extends React.Component {
         }
     }
 
+    async handleDelete(e) {
+        const id = e.target.value;
+        const idResponse = await fetch(`http://localhost:8080/api/appointments/${id}/`, {method: "DELETE"})  
+        console.log("🚀 ~ file: AppointmentsList.js ~ line 48 ~ AppointmentsList ~ handleDelete ~ idResponse", idResponse)
+        
+    }
     
     render() {
         let options = {timeZone: "UTC", year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit"};
@@ -74,12 +81,17 @@ class AppointmentsList extends React.Component {
                             {this.state.appointments ? this.state.appointments.map(appointment => {
                                 return (    
                                     <tr key={appointment.id}>
-                                        <td>{(appointment.vip ? "True" : "")}</td>
+                                        <td className="text-warning">{(appointment.vip ? "True" : null)}</td>
                                         <td>{appointment.vin}</td>
                                         <td>{appointment.customer_name}</td>
                                         <td>{new Date(appointment.date_time).toLocaleTimeString([], options)}</td>
                                         <td>{appointment.technician}</td>
                                         <td>{appointment.reason}</td>
+                                        <td>
+                                            <button onClick={this.handleDelete} type="submit" value={ appointment.id } className="mx-1 btn btn-danger">Cancel</button>
+
+                                            <button onClick={this.handleDelete} type="button" value={ appointment.id } className="mx-1 btn btn-success">Finish</button>
+                                        </td>
                                     </tr>
                                 );
                             }) : null}
