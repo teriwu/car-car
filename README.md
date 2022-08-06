@@ -43,7 +43,6 @@ The AutomobileVO model polls for data within the Inventory Microservices.
 It uses that data to create an automobile value object to use to make a sales record
 and keep track of inventories sold when a sold record is created.
 
----
 ## Getting started
 
 This application is run using Docker and React.
@@ -63,7 +62,6 @@ docker-compose up
 There should be seven containers in total: 1 (for our project), 3 (for each microservice), 2
 (for our pollers in our service api and sales api), 1 (for React), and 1 (for our database). 
 
----
 ## Other notes
 
 - Service Appointments List at http://localhost:3000/appointments does not automatically refresh itself when using the buttons: Search VIN, Cancel, Finish
