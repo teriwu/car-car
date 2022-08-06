@@ -14,39 +14,6 @@ function Nav() {
             <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="manufacturers/">Manufacturers List</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="manufacturers/new/">Create Manufacturer</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="vehiclemodels/">Vehicle Models</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="automobiles/">Automobiles List</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="automobiles/new">Create Automobile</NavLink>
-              </li>
-              <li>
-                <NavLink className="nav-link" to="salesperson/new/">Create Sales Person</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="customer/new/">Create Customer</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="salesrecord/new/">Create Sales Record</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="saleslist/">Sales Records</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="employeesaleslist/">Employee Sales Records</NavLink>
-              </li>
-              <li>
-              <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
-            </li>
 
             {/* Inventory drop down menu */}
             <li className="nav-item dropdown">
@@ -54,9 +21,12 @@ function Nav() {
                 Inventory
               </NavLink>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <NavLink className="dropdown-item" aria-current="page" to="manufcaturers/">Manufacturers List</NavLink>
                 <NavLink className="dropdown-item" aria-current="page" to="manufacturers/new/">Create Manufacturer</NavLink>
-                <NavLink className="dropdown-item" aria-current="page" to="/automobiles">List Automobiles</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="manufacturers/">Manufacturers List</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="models/new">Create Vehicle Model</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="models">List Vehicle Models</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="automobiles/new">Create Automobile</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="automobiles">List Automobiles</NavLink>
               </div>
             </li>
             
@@ -66,9 +36,11 @@ function Nav() {
                 Sales
               </NavLink>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <NavLink className="dropdown-item" aria-current="page" to="/models/new">New Vehicle Model</NavLink>
-                <NavLink className="dropdown-item" aria-current="page" to="/automobiles/new">New Automobile</NavLink>
-                <NavLink className="dropdown-item" aria-current="page" to="/automobiles">List Automobiles</NavLink>
+                <NavLink className="dropdown-item" to="salesperson/new/">Create Sales Person</NavLink>
+                <NavLink className="dropdown-item" to="customer/new/">Create Customer</NavLink>
+                <NavLink className="dropdown-item" to="salesrecord/new/">Create Sales Record</NavLink>
+                <NavLink className="dropdown-item" to="saleslist/">Sales Records</NavLink>
+                <NavLink className="dropdown-item" to="employeesaleslist/">Employee Sales Records</NavLink>
               </div>
             </li>
 
@@ -78,8 +50,8 @@ function Nav() {
                 Service
               </NavLink>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <NavLink className="dropdown-item" aria-current="page" to="/technicians/new">New Technician</NavLink>
-                <NavLink className="dropdown-item" aria-current="page" to="/appointments/new">New Appointment</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="/technicians/new">Create Technician</NavLink>
+                <NavLink className="dropdown-item" aria-current="page" to="/appointments/new">Create Appointment</NavLink>
                 <NavLink className="dropdown-item" aria-current="page" to="/appointments">Service Appointments</NavLink>
               </div>
             </li>
