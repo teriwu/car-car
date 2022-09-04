@@ -46,7 +46,7 @@ class SalesRecordEncoder(ModelEncoder):
     }
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def api_sales_persons(request):
     if request.method =="GET":
         sales_persons = SalesPerson.objects.all()
